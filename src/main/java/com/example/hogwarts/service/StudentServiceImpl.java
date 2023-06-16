@@ -10,8 +10,8 @@ import java.util.stream.Collectors;
 @Service
 public class StudentServiceImpl implements StudentService {
 
-    HashMap<Long, Student> studentHashMap = new HashMap<>();
-    Long counter = 1L;
+    private final HashMap<Long, Student> studentHashMap = new HashMap<>();
+    private Long counter = 1L;
 
     @Override
     public void addStudent(Student student) {

@@ -1,7 +1,7 @@
 package com.example.hogwarts.controller;
 
 import com.example.hogwarts.model.Faculty;
-import com.example.hogwarts.service.HouseServiceImpl;
+import com.example.hogwarts.service.HouseService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -13,9 +13,9 @@ import java.util.List;
 public class HouseController {
 
 
-    HouseServiceImpl houseService;
+    private final HouseService houseService;
 
-    public HouseController(HouseServiceImpl houseService) {
+    public HouseController(HouseService houseService) {
         this.houseService = houseService;
     }
 

@@ -1,7 +1,7 @@
 package com.example.hogwarts.controller;
 
 import com.example.hogwarts.model.Student;
-import com.example.hogwarts.service.StudentServiceImpl;
+import com.example.hogwarts.service.StudentService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -11,9 +11,10 @@ import java.util.List;
 @RequestMapping("student")
 public class StudentController {
 
-    StudentServiceImpl studentService;
+    private final StudentService studentService;
 
-    public StudentController(StudentServiceImpl studentService) {
+
+    public StudentController(StudentService studentService) {
         this.studentService = studentService;
     }
 

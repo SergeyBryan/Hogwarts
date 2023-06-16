@@ -10,7 +10,7 @@ import java.util.stream.Collectors;
 @Service
 public class HouseServiceImpl implements HouseService {
 
-    private HashMap<Long, Faculty> facultyHashMap = new HashMap<>();
+    private final HashMap<Long, Faculty> facultyHashMap = new HashMap<>();
     private Long counter = 1L;
 
     @Override
