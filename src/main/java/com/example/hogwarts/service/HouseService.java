@@ -8,7 +8,7 @@ public interface HouseService {
 
     void addFaculty(Faculty faculty);
 
-    void editFaculty(Long id, Faculty faculty);
+    Faculty editFaculty(Long id, Faculty faculty);
 
     void deleteFaculty(Long id);
 

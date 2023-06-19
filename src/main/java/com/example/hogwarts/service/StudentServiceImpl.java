@@ -5,12 +5,13 @@ import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 @Service
 public class StudentServiceImpl implements StudentService {
 
-    private final HashMap<Long, Student> studentHashMap = new HashMap<>();
+    private final Map<Long, Student> studentHashMap = new HashMap<>();
     private Long counter = 1L;
 
     @Override
@@ -20,8 +21,13 @@ public class StudentServiceImpl implements StudentService {
     }
 
     @Override
-    public void editStudent(Long id, Student student) {
-        studentHashMap.put(id, student);
+    public Student editStudent(Long id, Student student) {
+        if (studentHashMap.containsKey(id)) {
+            studentHashMap.put(id, student);
+            return studentHashMap.get(id);
+        } else {
+            return null;
+        }
     }
 
     @Override

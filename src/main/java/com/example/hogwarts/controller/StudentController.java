@@ -18,31 +18,33 @@ public class StudentController {
         this.studentService = studentService;
     }
 
-    @GetMapping("/get/{id}")
+    @GetMapping("/{id}")
     public ResponseEntity<Student> getStudent(@PathVariable Long id) {
-        if (studentService.getStudent(id) != null) {
-            return ResponseEntity.ok(studentService.getStudent(id));
+        Student student = studentService.getStudent(id);
+        if (student != null) {
+            return ResponseEntity.ok(student);
         } else {
             return ResponseEntity.notFound().build();
         }
     }
 
-    @GetMapping("/getByAge/{age}")
-    public ResponseEntity<List<Student>> getStudentByAge(@PathVariable int age) {
-        if (studentService.getStudentByAge(age) != null) {
-            return ResponseEntity.ok(studentService.getStudentByAge(age));
+    @GetMapping
+    public ResponseEntity<List<Student>> getStudentByAge(@RequestParam int age) {
+        List<Student> list = studentService.getStudentByAge(age);
+        if (!list.isEmpty()) {
+            return ResponseEntity.ok(list);
         } else {
             return ResponseEntity.notFound().build();
         }
     }
 
-    @PostMapping("/add")
+    @PostMapping
     public ResponseEntity<String> addStudent(@RequestBody Student student) {
         studentService.addStudent(student);
         return ResponseEntity.ok("Студент внесён");
     }
 
-    @PutMapping("/put/{id}")
+    @PutMapping("/{id}")
     public ResponseEntity<String> editStudent(@PathVariable Long id, @RequestBody Student student) {
         if (studentService.getStudent(id) != null) {
             studentService.editStudent(id, student);
@@ -52,7 +54,7 @@ public class StudentController {
         }
     }
 
-    @DeleteMapping("/delete/{id}")
+    @DeleteMapping("/{id}")
     public ResponseEntity<String> deleteStudent(@PathVariable Long id) {
         if (studentService.getStudent(id) != null) {
             studentService.deleteStudent(id);

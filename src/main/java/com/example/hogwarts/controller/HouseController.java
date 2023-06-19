@@ -19,39 +19,42 @@ public class HouseController {
         this.houseService = houseService;
     }
 
-    @GetMapping("/get/{id}")
+    @GetMapping("/{id}")
     public ResponseEntity<Faculty> getFaculty(@PathVariable Long id) {
-        if (houseService.getFaculty(id) != null) {
-            return ResponseEntity.ok(houseService.getFaculty(id));
-        }
-        return ResponseEntity.notFound().build();
-    }
-
-    @GetMapping("/getByColor/{color}")
-    public ResponseEntity<List<Faculty>> getFacultyByColor(@PathVariable String color) {
-        if (houseService.getFacultyByColor(color) != null) {
-            return ResponseEntity.ok(houseService.getFacultyByColor(color));
+        Faculty faculty = houseService.getFaculty(id);
+        if (faculty != null) {
+            return ResponseEntity.ok(faculty);
         } else {
             return ResponseEntity.notFound().build();
         }
     }
 
-    @PostMapping("/add")
+    @GetMapping
+    public ResponseEntity<List<Faculty>> getFacultyByColor(@RequestParam String color) {
+        List<Faculty> list = houseService.getFacultyByColor(color);
+        if (!list.isEmpty()) {
+            return ResponseEntity.ok(list);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
+
+    @PostMapping
     public ResponseEntity<String> addFaculty(@RequestBody Faculty faculty) {
         houseService.addFaculty(faculty);
         return ResponseEntity.ok("Факультет добавлен!");
     }
 
-    @PutMapping("/put/{id}")
+    @PutMapping("/{id}")
     public ResponseEntity<String> editFaculty(@PathVariable Long id, @RequestBody Faculty faculty) {
-        if (houseService.getFaculty(id) != null) {
+        if (houseService.editFaculty(id, faculty) != null) {
             houseService.editFaculty(id, faculty);
             return ResponseEntity.ok("Факультет отредактирован");
         }
         return ResponseEntity.notFound().build();
     }
 
-    @DeleteMapping("/delete/{id}")
+    @DeleteMapping("/{id}")
     public ResponseEntity<String> deleteFaculty(@PathVariable Long id) {
         if (houseService.getFaculty(id) != null) {
             houseService.deleteFaculty(id);

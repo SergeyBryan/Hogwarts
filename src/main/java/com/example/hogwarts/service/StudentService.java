@@ -8,7 +8,7 @@ public interface StudentService {
 
     void addStudent(Student student);
 
-    void editStudent(Long id, Student student);
+    Student editStudent(Long id, Student student);
 
     void deleteStudent(Long id);
 
