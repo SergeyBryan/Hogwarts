@@ -23,7 +23,7 @@ public class StudentServiceImpl implements StudentService {
     @Override
     public Student editStudent(Long id, Student student) {
         if (studentHashMap.containsKey(id)) {
-            studentHashMap.put(id, student);
+            studentHashMap.replace(id, student);
             return studentHashMap.get(id);
         } else {
             return null;

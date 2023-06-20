@@ -23,7 +23,7 @@ public class HouseServiceImpl implements HouseService {
     @Override
     public Faculty editFaculty(Long id, Faculty faculty) {
         if (facultyHashMap.containsKey(id)) {
-            facultyHashMap.put(id, faculty);
+            facultyHashMap.replace(id, faculty);
             return faculty;
         } else {
             return null;

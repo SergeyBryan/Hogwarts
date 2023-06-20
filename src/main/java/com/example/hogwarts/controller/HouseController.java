@@ -31,12 +31,7 @@ public class HouseController {
 
     @GetMapping
     public ResponseEntity<List<Faculty>> getFacultyByColor(@RequestParam String color) {
-        List<Faculty> list = houseService.getFacultyByColor(color);
-        if (!list.isEmpty()) {
-            return ResponseEntity.ok(list);
-        } else {
-            return ResponseEntity.notFound().build();
-        }
+        return ResponseEntity.ok(houseService.getFacultyByColor(color));
     }
 
     @PostMapping
@@ -47,8 +42,8 @@ public class HouseController {
 
     @PutMapping("/{id}")
     public ResponseEntity<String> editFaculty(@PathVariable Long id, @RequestBody Faculty faculty) {
-        if (houseService.editFaculty(id, faculty) != null) {
-            houseService.editFaculty(id, faculty);
+        Faculty newFaculty = houseService.editFaculty(id, faculty);
+        if (newFaculty != null) {
             return ResponseEntity.ok("Факультет отредактирован");
         }
         return ResponseEntity.notFound().build();

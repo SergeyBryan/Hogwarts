@@ -30,12 +30,7 @@ public class StudentController {
 
     @GetMapping
     public ResponseEntity<List<Student>> getStudentByAge(@RequestParam int age) {
-        List<Student> list = studentService.getStudentByAge(age);
-        if (!list.isEmpty()) {
-            return ResponseEntity.ok(list);
-        } else {
-            return ResponseEntity.notFound().build();
-        }
+        return ResponseEntity.ok(studentService.getStudentByAge(age));
     }
 
     @PostMapping
@@ -46,8 +41,8 @@ public class StudentController {
 
     @PutMapping("/{id}")
     public ResponseEntity<String> editStudent(@PathVariable Long id, @RequestBody Student student) {
-        if (studentService.getStudent(id) != null) {
-            studentService.editStudent(id, student);
+        Student newStudent = studentService.editStudent(id, student);
+        if (newStudent != null) {
             return ResponseEntity.ok("Студент был отредактирован");
         } else {
             return ResponseEntity.notFound().build();
